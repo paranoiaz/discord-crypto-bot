@@ -1,0 +1,3 @@
+TOKEN = "TOKEN"
+PREFIX = "!"
+COOLDOWN = "5"

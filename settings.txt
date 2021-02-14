@@ -1,0 +1,5 @@
+{
+    "name": "crypto",
+    "currency": "usd",
+    "setup": false
+}
