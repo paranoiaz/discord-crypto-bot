@@ -1,5 +1,5 @@
 # Discord CryptoBot
-A simple easy to use and configure bot to track cryptocurrency. Currently only supports Bitcoin and Ethereum but more coins might be added in the future.
+A simple to use and easy to configure bot to track cryptocurrency. Currently only supports Bitcoin and Ethereum but more cryptocurrencies might be added in the future.
 
 **Dependencies**
 ```
