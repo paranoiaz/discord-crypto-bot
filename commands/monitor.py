@@ -66,7 +66,7 @@ class CryptoMonitor(commands.Cog):
     @commands.command(name="run", aliases=["go"])
     @commands.has_permissions(administrator=True)
     async def loop_monitor(self, ctx, interval=None):
-        """<interval> - Specify a delay between checks, defaults to 1 minute if none is given."""
+        """[interval] - *OPTIONAL* Specify a delay between checks, defaults to 1 minute if none is given."""
         self.log.log_command(ctx.author, "run")
         if not self.channel:
             with open("settings.txt", "r") as settings_input:
@@ -112,7 +112,7 @@ class CryptoMonitor(commands.Cog):
     @commands.command(name="setup", aliases=["start"])
     @commands.has_permissions(administrator=True)
     async def setup_monitor(self, ctx, name=None):
-        """<name> - Specify a channel name, defaults to crypto if none is given."""
+        """[name] - *OPTIONAL* Specify a channel name, defaults to crypto if none is given."""
         self.log.log_command(ctx.author, "setup")
         try:
             with open("settings.txt", "r") as settings_input:
@@ -145,7 +145,7 @@ class CryptoMonitor(commands.Cog):
     @commands.command(name="edit", aliases=["change", "config"])
     @commands.has_permissions(administrator=True)
     async def edit_currency_monitor(self, ctx, currency=None):
-        """<currency> - Specify a currency, defaults to USD if none is given."""
+        """<currency> - *REQUIRED* Specify a currency to edit the monitor's display with."""
         self.log.log_command(ctx.author, "edit")
         try:
             with open("settings.txt", "r") as settings_input:
@@ -175,7 +175,7 @@ class CryptoMonitor(commands.Cog):
     @commands.command(name="reset")
     @commands.has_permissions(administrator=True)
     async def reset_monitor(self, ctx, name=None):
-        """<monitor> - Specify a monitor name to reset the settings."""
+        """<monitor> - *REQUIRED* Specify a monitor name to reset the settings."""
         self.log.log_command(ctx.author, "reset")
         if not name:
             await ctx.send("Pass the monitor's name as argument to confirm the reset.")
