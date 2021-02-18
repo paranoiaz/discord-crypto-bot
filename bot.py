@@ -2,6 +2,8 @@ import os
 import timestamp
 import config
 import custom_logging
+import discord
+import datetime
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix=config.PREFIX, help_command=None, case_insensitive=True)
@@ -22,19 +24,24 @@ async def on_command_error(ctx, exception):
 
 @bot.command(name="help", aliases=["commands"])
 async def help(ctx, command=None):
-    """<command> - Specify a command, outputs commands if none is given."""
+    """[command] - *OPTIONAL* Specify a command, outputs commands if none is given."""
     log.log_command(ctx.author, "help")
     _commands = "\n".join([str(command) for command in bot.commands])
-    if not command:
-        await ctx.send(f"List of commands:```\n{_commands}```Specify a command for more information.")
-    else:
-        for _command in bot.commands:
-            if str(_command) == command.lower():
-                tmp = _command
-                await ctx.send(f"```\n{str(command)} {tmp.help}```")
-                break
+    help_embed = discord.Embed(title="Crypto Bot", description=f"List of commands and their parameters:", colour=0x00CC00, timestamp=datetime.datetime.utcnow())
+    help_embed.set_footer(text=f"Specify a command for more information")
+
+    for _command in bot.commands:
+        if not command:
+            help_embed.add_field(name=f"{str(_command)}", value=f"{_command.help.split('-')[0]}")
         else:
-            await ctx.send(f"Command not found, please use a valid one.")
+            if str(_command) == command.lower():
+                await ctx.send(f"```\n{str(_command)} {_command.help}```")
+                return
+
+    if not command:
+        await ctx.send(embed=help_embed)
+    else:
+        await ctx.send(f"Command not found, please use a valid one.")
 
 
 if __name__ == "__main__":
